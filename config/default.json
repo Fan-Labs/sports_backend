@@ -1,0 +1,34 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "authentication": {
+    "secret": "2dfcb2bf0f79c8d68c6f76b02406b97e120f8961dbdab5b584f31dd627264707fa1cdffd75e86e43608c22a97304b89a8a926eee6fdc2d197982ff765dfa05449ff8b8400be5daef18e663b824dfef8f26d867759f7502ac29f2aad6ac6f9fd5b70876821fe29b16373346faa4d99ae3e1a8ccc0a6d527f5d21282cf53f957c6db60f213f487bc6c9a4742ac31a45f93809f2928187a86d955cd3180ba916e13bc4cac90b12a53b95204e5672b9ad082278978420f6590199a1c0a753a191eb93e14f5c49622fcaceabb1aeac6ce63ae0c232b5ac5b2b53328827763e3c3fbe4be0a7511600cdd81a78ca882df29445d0e2f58b858ad638652ed50a90b7fab16",
+    "strategies": [
+      "jwt",
+      "local"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  },
+  "postgres": "postgres://grantvanhelsdingen@localhost:5432/sports_app"
+}
