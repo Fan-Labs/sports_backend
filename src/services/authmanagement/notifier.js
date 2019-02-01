@@ -42,7 +42,12 @@ module.exports = function(app) {
 
         case 'sendResetPwd':
           tokenLink = getLink('reset', user.resetToken)
-          email = {}
+          email = {
+             from: process.env.FROM_EMAIL,
+             to: user.email,
+             subject: 'Reset your password',
+             html: 'Reset your password using this link'
+          }
           return sendEmail(email)
           break
 
