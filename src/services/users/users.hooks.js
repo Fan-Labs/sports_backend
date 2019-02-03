@@ -16,7 +16,7 @@ module.exports = {
       verifyHooks.addVerification()
     ],
     update: [ hashPassword(),  authenticate('jwt') ],
-    patch: [ hashPassword(),  authenticate('jwt') ],
+    patch: [ authenticate('jwt') ],
     remove: [ authenticate('jwt') ]
   },
 

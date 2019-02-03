@@ -1,7 +1,7 @@
 module.exports = function(app) {
 
   function getLink(type, hash) {
-    const url = 'http://localhost:3030/' + type + '?token=' + hash
+    const url = process.env.FRONTEND_URL + type + '?token=' + hash
     return url
   }
 
@@ -24,13 +24,12 @@ module.exports = function(app) {
              from: process.env.FROM_EMAIL,
              to: user.email,
              subject: 'Verify Signup',
-             html: tokenLink
+             html: `Verify your email using this link: ${tokenLink}`
           }
           return sendEmail(email)
           break
 
         case 'verifySignup': // confirming verification
-          tokenLink = getLink('verify', user.verifyToken)
           email = {
              from: process.env.FROM_EMAIL,
              to: user.email,
@@ -41,19 +40,23 @@ module.exports = function(app) {
           break
 
         case 'sendResetPwd':
-          tokenLink = getLink('reset', user.resetToken)
+          tokenLink = getLink('passwordreset', user.resetToken)
           email = {
              from: process.env.FROM_EMAIL,
              to: user.email,
              subject: 'Reset your password',
-             html: 'Reset your password using this link'
+             html: `Reset your password here: ${tokenLink}` //replace with full url
           }
           return sendEmail(email)
           break
 
         case 'resetPwd':
-          tokenLink = getLink('reset', user.resetToken)
-          email = {}
+          email = {
+             from: process.env.FROM_EMAIL,
+             to: user.email,
+             subject: 'Confirm Password Reset',
+             html: 'Password reset successfully'
+          }
           return sendEmail(email)
           break
 
