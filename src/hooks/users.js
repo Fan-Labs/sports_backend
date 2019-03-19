@@ -8,6 +8,20 @@ const addAdditionalUserFlags =  (context) => {
   Object.assign(context.params.payload, {isMerchant, isAdmin, isVerified})
 }
 
+
+//add merchant ID to business data payload
+const addMerchantId =  (context) => {
+  console.log('creating/patching a businesses with user id: '+ context.params.user.id)      
+  //only merchants can create businesses
+  if(context.params.user && context.params.user.isMerchant) {
+    context.data.merchantId = context.params.user.id
+  } else {
+  	throw new Error('User is not a merchant');
+  }
+  return context
+}
+
 module.exports = {
 	addAdditionalUserFlags,
+	addMerchantId
 }

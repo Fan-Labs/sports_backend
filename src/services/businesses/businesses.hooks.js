@@ -1,4 +1,5 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
+const userHooks = require('../../hooks/users');
 
 module.exports = {
   before: {
@@ -7,7 +8,7 @@ module.exports = {
       (context) => {
         console.log('finding all businesses')
         console.log(context.params.user.id)
-        
+
         //merchants can only fetch a list of their own businesses in the merchant portal
         if(context.params.user.isMerchant) {
           context.params.query = {
@@ -19,10 +20,14 @@ module.exports = {
         return context
       }
     ],
-    get: [],
-    create: [],
+    get: [ authenticate('jwt') ],
+    create: [
+      userHooks.addMerchantId
+    ],
     update: [],
-    patch: [],
+    patch: [
+      userHooks.addMerchantId
+    ],
     remove: []
   },
 
