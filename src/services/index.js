@@ -5,6 +5,7 @@ const businesses = require('./businesses/businesses.service.js');
 const authentication = require('./authentication/authentication.service.js')
 const teams = require('./teams/teams.service.js');
 const fixtures = require('./fixtures/fixtures.service.js');
+const businessFixture = require('./business-fixture/business-fixture.service.js');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(authentication);
@@ -14,4 +15,5 @@ module.exports = function (app) {
   app.configure(businesses);
   app.configure(teams);
   app.configure(fixtures);
+  app.configure(businessFixture);
 };

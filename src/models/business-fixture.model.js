@@ -5,18 +5,10 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const fixtures = sequelizeClient.define('fixtures', {
-    startDateTime: {
-      type: DataTypes.DATE,
+  const businessFixture = sequelizeClient.define('business_fixture', {
+    text: {
+      type: DataTypes.STRING,
       allowNull: false
-    },
-    duration: {
-      type: DataTypes.FLOAT,
-      allowNull: false
-    },
-    stats: {
-      type: DataTypes.JSON,
-      allowNull: true
     }
   }, {
     hooks: {
@@ -27,12 +19,10 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  fixtures.associate = function (models) {
-    fixtures.belongsTo(models.teams, {as: 'homeTeam', foreignKey: 'homeTeamId'})
-    fixtures.belongsTo(models.teams, {as: 'awayTeam', foreignKey: 'awayTeamId'})
+  businessFixture.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
   };
 
-  return fixtures;
+  return businessFixture;
 };
