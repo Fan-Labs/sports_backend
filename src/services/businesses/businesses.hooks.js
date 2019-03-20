@@ -1,24 +1,16 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
+const { iff, isProvider, discard } = require('feathers-hooks-common');
+const hooks = require('../../hooks');
+const businessHooks = require('../../hooks/business');
 const userHooks = require('../../hooks/users');
 
 module.exports = {
   before: {
     all: [ authenticate('jwt') ],
     find: [
-      (context) => {
-        console.log('finding all businesses')
-        console.log(context.params.user.id)
-
-        //merchants can only fetch a list of their own businesses in the merchant portal
-        if(context.params.user.isMerchant) {
-          context.params.query = {
-            ...context.params.query,
-            merchantId: context.params.user.id
-          }
-        }
-
-        return context
-      }
+      businessHooks.queryByMerchantId,
+      businessHooks.includeNestedBusinessFixtures,
+      hooks.rawFalse
     ],
     get: [ authenticate('jwt') ],
     create: [
@@ -35,7 +27,10 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [
+      //after creating a business, we create a business-fixture for each fixture in DB
+      businessHooks.createBusinessFixtures
+    ],
     update: [],
     patch: [],
     remove: []

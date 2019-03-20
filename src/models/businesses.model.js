@@ -41,7 +41,7 @@ module.exports = function (app) {
   }, {
     hooks: {
       beforeCount(options) {
-        options.raw = true;
+        options.raw = false;
       }
     }
   });
@@ -49,6 +49,7 @@ module.exports = function (app) {
   // eslint-disable-next-line no-unused-vars
   businesses.associate = function (models) {
     businesses.belongsTo(models.users, {foreignKey: 'merchantId'})
+    businesses.hasMany(models['business_fixture'])
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
   };

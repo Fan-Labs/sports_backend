@@ -1,28 +1,12 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
+const fixtureHooks = require('../../hooks/fixtures');
 
 module.exports = {
   before: {
     all: [ authenticate('jwt') ],
     find: [
-    (context) => {
-      const sequelize = context.app.get('sequelizeClient');
-      const { teams } = sequelize.models;
-
-      context.params.sequelize = {
-        include: [
-          {
-              model: teams,
-              as: 'homeTeam'
-          },
-          {
-              model: teams,
-              as: 'awayTeam'
-          }
-        ]
-      }
-
-      return context
-    }],
+      fixtureHooks.includeTeams
+    ],
     get: [],
     create: [],
     update: [],
@@ -34,7 +18,10 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [
+      //after creating a fixture, we create a business-fixture for each business in DB
+      fixtureHooks.createBusinessFixtures
+    ],
     update: [],
     patch: [],
     remove: []

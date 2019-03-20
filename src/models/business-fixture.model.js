@@ -6,20 +6,27 @@ const DataTypes = Sequelize.DataTypes;
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
   const businessFixture = sequelizeClient.define('business_fixture', {
-    text: {
-      type: DataTypes.STRING,
-      allowNull: false
-    }
+    //We create fixtures for all businesses, set to inactive as default
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
   }, {
     hooks: {
       beforeCount(options) {
-        options.raw = true;
+        options.raw = false;
       }
-    }
+    },
+    indexes: [
+      {fields: ['fixtureId', 'businessId'], unique: true}
+    ]
   });
 
   // eslint-disable-next-line no-unused-vars
   businessFixture.associate = function (models) {
+    businessFixture.belongsTo(models.fixtures, {foreignKey: 'fixtureId'})
+    businessFixture.belongsTo(models.businesses, {foreignKey: 'businessId'})
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
   };
