@@ -12,7 +12,7 @@ module.exports = {
       businessHooks.includeNestedBusinessFixtures,
       hooks.rawFalse
     ],
-    get: [ authenticate('jwt') ],
+    get: [ ],
     create: [
       userHooks.addMerchantId
     ],

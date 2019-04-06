@@ -18,6 +18,7 @@ module.exports.includeTeams = (context) => {
   const { teams } = sequelize.models;
 
   context.params.sequelize = {
+    ...context.params.sequelize,
     include: [
       {
           model: teams,

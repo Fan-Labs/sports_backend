@@ -1,8 +1,9 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
+const businessFixtureHooks = require('../../hooks/businessFixtures');
 
 module.exports = {
   before: {
-    all: [ authenticate('jwt') ],
+    all: [ authenticate('jwt'), businessFixtureHooks.includeFixture ],
     find: [],
     get: [],
     create: [],
