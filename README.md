@@ -52,3 +52,7 @@ The authmanagement, users and authentication services implement the flows around
 ## POSTman API Collection
 
   Example calls to the API are detailed in the `Sports Backend.postman_collection.json`. This can be imported into Postman and used to test the API.
+
+## Models
+
+  Currently, data models are persisted into a PostgreSQL database, using Sequelize as an ORM to interface with them. To learn more, see the documentatiom for Feathers Sequelize (https://github.com/feathersjs-ecosystem/feathers-sequelize), Sequelize (https://sequelize.org/) and PostgreSQL (https://www.postgresql.org/)
