@@ -1,6 +1,6 @@
 # sports-backend
 
-> API for sports app
+> API for Huddl App
 
 ## About
 
@@ -23,34 +23,32 @@ Getting up and running is as easy as 1, 2, 3.
     npm start
     ```
 
-## Testing
 
-Simply run `npm test` and all your tests in the `test/` directory will be run.
+## Users and Authentication
 
-## Scaffolding
+The authmanagement, users and authentication services implement the flows around creating users, verifying their email, and issuing them authentication tokens.
 
-Feathers has a powerful command line interface. Here are a few things it can do:
+1. Creating a user
+  Users can be created with a `POST` to the route `/users` with a payload like the following: 
+    ```
+      {
+        "email": "grant.van.helsdingen@connecto.co.za",
+        "password": "secret",
+        "isAdmin": false,
+        "isMerchant": true
+      }
+    ```
+  This will trigger a post-creation hook to send a verification email to the user - using the authmanagement notifier. Currently the API is using `nodemailer-smtp-transport` library to send emails via AWS SES. This is currently in sandbox mode so only verified email addresses will work.
 
-```
-$ npm install -g @feathersjs/cli          # Install Feathers CLI
+  Once a user is created and verified, JWT tokens can be issued via `POST` calls to `/authentication` with a payload:
+    ```
+    {
+      "strategy": "local",
+      "email": "gvanhels@gmail.com",
+      "password": "test"
+    }
+    ```
 
-$ feathers generate service               # Generate a new Service
-$ feathers generate hook                  # Generate a new Hook
-$ feathers help                           # Show all commands
-```
+## POSTman API Collection
 
-## Help
-
-For more information on all the things you can do with Feathers visit [docs.feathersjs.com](http://docs.feathersjs.com).
-
-## Changelog
-
-__0.1.0__
-
-- Initial release
-
-## License
-
-Copyright (c) 2018
-
-Licensed under the [MIT license](LICENSE).
+  Example calls to the API are detailed in the `Sports Backend.postman_collection.json`. This can be imported into Postman and used to test the API.

@@ -1,0 +1,620 @@
+{
+	"info": {
+		"_postman_id": "0a8b255a-d699-4aa4-99a0-28a6ba889cb4",
+		"name": "Sports Backend",
+		"description": "A collection of API calls for the FeathersJS chat guide at https://docs.feathersjs.com/guides/chat/readme.html",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "4. Creating a token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a3f53d00-39b6-4aff-a480-f191ceb5f4fc",
+						"exec": [
+							"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"strategy\": \"local\",\n\t\"email\": \"gvanhels@gmail.com\",\n\t\"password\": \"test\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/authentication",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"authentication"
+					]
+				},
+				"description": "For https://docs.feathersjs.com/guides/chat/authentication.html"
+			},
+			"response": []
+		},
+		{
+			"name": "2. List all businesses",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/businesses",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"businesses"
+					]
+				},
+				"description": "For https://docs.feathersjs.com/guides/chat/service.html"
+			},
+			"response": []
+		},
+		{
+			"name": "2. List all fixtures",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/fixtures",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"fixtures"
+					]
+				},
+				"description": "For https://docs.feathersjs.com/guides/chat/service.html"
+			},
+			"response": []
+		},
+		{
+			"name": "2. List all offers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/offers?merchantId=2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"offers"
+					],
+					"query": [
+						{
+							"key": "merchantId",
+							"value": "2"
+						}
+					]
+				},
+				"description": "For https://docs.feathersjs.com/guides/chat/service.html"
+			},
+			"response": []
+		},
+		{
+			"name": "2. List all business fixtures",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/business-fixture",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"business-fixture"
+					]
+				},
+				"description": "For https://docs.feathersjs.com/guides/chat/service.html"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Business",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"test business\",\n    \"description\": \"its a business\",\n    \"phoneNumber\": \"0836064581\",\n    \"latitude\": -33.918861,\n    \"longitude\": 18.423300,\n    \"streetAddress\": \"6 Hiddingh Ave, Gardens, Cape Town\",\n    \"logoUrl\":null,\n    \"googlePlace\": {}\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/businesses",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"businesses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Fixture",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"startDateTime\": \"2019-09-01T20:00:00+00:00\",\n    \"duration\": 90,\n    \"homeTeamId\": 1,\n    \"awayTeamId\": 2,\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/fixtures",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"fixtures"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Offer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\": \"Any SAB beer for half price\",\n    \"offerType\": \"percent_discount\",\n    \"offerDetails\": { \"percent_discount\": \"50%\" },\n    \"itemType\": \"beer\",\n    \"merchantId\": 2\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/offers",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"offers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Business-Fixture",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fixtureId\": 1,\n    \"businessId\": 1\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/business-fixture",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"business-fixture"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. Create a user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"gvanhels@gmail.com\",\n  \"password\": \"secret\",\n  \"isAdmin\": false,\n  \"isMerchant\": true\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				},
+				"description": "For https://docs.feathersjs.com/guides/chat/authentication.html"
+			},
+			"response": []
+		},
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"strategy\": \"local\",\n  \"email\": \"gvanhels@gmail.com\",\n  \"password\": \"secret\",\n  \"isMerchant\": \"t\",\n  \"isAdmin\": \"t\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"action\": \"verifySignupLong\",\n  \"value\": \"c2fc4289a6f23bb7a97a11555f02ad\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/authManagement",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"authManagement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Reset Password",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"action\": \"sendResetPwd\",\n  \"value\": {\"email\": \"gvanhels@gmail.com\"}\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/authManagement",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"authManagement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Team",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Hull City F.C\",\n    \"sport\": \"SOCCER\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/teams",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"teams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all teams",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/teams",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"teams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all teams Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/teams",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"teams"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
