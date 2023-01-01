@@ -32,7 +32,7 @@
     "@feathersjs/authentication": "^2.1.13",
     "@feathersjs/authentication-jwt": "^2.0.7",
     "@feathersjs/authentication-local": "^1.2.7",
-    "@feathersjs/configuration": "^2.0.4",
+    "@feathersjs/configuration": "^2.0.6",
     "@feathersjs/errors": "^3.3.4",
     "@feathersjs/express": "^1.2.7",
     "@feathersjs/feathers": "^3.2.3",
@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "eslint": "^5.9.0",
-    "jest": "^23.6.0",
+    "jest": "^29.3.1",
     "nodemon": "^1.18.7",
     "request": "^2.88.0",
     "request-promise": "^4.2.2"
